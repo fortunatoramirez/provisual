@@ -65,7 +65,7 @@ def actualizar_grafico(i):
 # Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Lectura de Sensor con Arduino")
-ventana.geometry("500x400")
+ventana.geometry("600x500")
 
 # Crear widgets
 etiqueta = tk.Label(ventana, text="Leyendo datos del sensor...", font=("Arial", 14))
@@ -75,7 +75,7 @@ etiqueta_valor = tk.Label(ventana, text="Valor Sensor: --", font=("Arial", 18), 
 etiqueta_valor.pack(pady=10)
 
 # Crear la figura de Matplotlib dentro de Tkinter
-fig, ax = plt.subplots(figsize=(5, 3))
+fig, ax = plt.subplots(figsize=(7, 5))
 canvas = FigureCanvasTkAgg(fig, master=ventana)  # Agrega la figura a Tkinter
 canvas.get_tk_widget().pack()
 
