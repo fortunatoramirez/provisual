@@ -1,9 +1,9 @@
-### **🔄 Modificación de la Práctica 2**
+### **Modificación de la Práctica 2**
 En la Práctica 2, agregaremos **Matplotlib en Tkinter** para graficar los datos recibidos desde **Arduino** en tiempo real.
 
 ---
 
-### **1️⃣ Instalación de Bibliotecas Adicionales**
+### **1️Instalación de Bibliotecas Adicionales**
 Antes de comenzar, necesitamos instalar `matplotlib`:
 ```sh
 pip install matplotlib
@@ -12,7 +12,7 @@ Esto permitirá dibujar gráficos dentro de la interfaz de Tkinter.
 
 ---
 
-### **2️⃣ Código Modificado para la Práctica 2 (Tkinter + Gráfica en Matplotlib)**
+### **2️Código Modificado para la Práctica 2 (Tkinter + Gráfica en Matplotlib)**
 ```python
 import tkinter as tk
 import serial
@@ -92,10 +92,10 @@ ventana.mainloop()
 
 ---
 
-### **📖 Explicación Detallada del Código - Práctica 2 (Tkinter + Matplotlib en Tiempo Real)**  
+### **Explicación Detallada del Código - Práctica 2 (Tkinter + Matplotlib en Tiempo Real)**  
 
 
-## **1️⃣ Importación de Bibliotecas**
+## **1️ Importación de Bibliotecas**
 ```python
 import tkinter as tk
 import serial
@@ -104,7 +104,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 ```
-### **🔍 Explicación**
+### **Explicación**
 - `tkinter`: Biblioteca para crear **interfaces gráficas** en Python.
 - `serial`: Permite **comunicarse con Arduino** a través del **puerto USB**.
 - `time`: Maneja **pausas y tiempos de espera** en el código.
@@ -114,7 +114,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 ---
 
-## **2️⃣ Configuración del Puerto Serial**
+## **2️ Configuración del Puerto Serial**
 ```python
 puerto = 'COM6'  # Cambiar según el puerto del Arduino
 baudrate = 9600
@@ -127,7 +127,7 @@ except Exception as e:
     print(f"Error de conexión: {e}")
     arduino = None
 ```
-### **🔍 Explicación**
+### **Explicación**
 1. Se define el **puerto** (`COM6` en Windows, `/dev/ttyUSB0` en Linux/Mac).
 2. Se establece la **velocidad de transmisión (baudrate)** en 9600 baudios.
 3. Se intenta abrir la conexión con **`serial.Serial()`**:
@@ -136,7 +136,7 @@ except Exception as e:
 
 ---
 
-## **3️⃣ Creación de una Lista para Almacenar los Datos**
+## **3️ Creación de una Lista para Almacenar los Datos**
 ```python
 valores_sensor = []
 ```
@@ -146,7 +146,7 @@ valores_sensor = []
 
 ---
 
-## **4️⃣ Función para Leer Datos del Sensor**
+## **4️ Función para Leer Datos del Sensor**
 ```python
 def leer_sensor():
     if arduino:
@@ -163,7 +163,7 @@ def leer_sensor():
 
     ventana.after(500, leer_sensor)  # Llama a esta función cada 500ms
 ```
-### **🔍 Explicación**
+### ** Explicación**
 1. **Si Arduino está conectado**, se envía el comando **`"r".encode()`** para solicitar un dato.
 2. **Se lee la respuesta del Arduino** usando `readline().strip()`.
 3. **Se intenta convertir el valor a un entero** (`int(val)`) para evitar errores.
@@ -174,7 +174,7 @@ def leer_sensor():
 
 ---
 
-## **5️⃣ Función para Actualizar la Gráfica en Tiempo Real**
+## **5️ Función para Actualizar la Gráfica en Tiempo Real**
 ```python
 def actualizar_grafico(i):
     ax.clear()
@@ -185,7 +185,7 @@ def actualizar_grafico(i):
     ax.set_ylim(0, 1023)  # Rango de valores analógicos en Arduino
     canvas.draw()
 ```
-### **🔍 Explicación**
+### ** Explicación**
 1. **Borra el gráfico anterior** con `ax.clear()`.
 2. **Dibuja los nuevos valores en la gráfica** con `ax.plot(valores_sensor)`.
 3. **Agrega títulos y etiquetas** (`set_title()`, `set_ylabel()`, `set_xlabel()`).
@@ -194,20 +194,20 @@ def actualizar_grafico(i):
 
 ---
 
-## **6️⃣ Creación de la Ventana en Tkinter**
+## **6️ Creación de la Ventana en Tkinter**
 ```python
 ventana = tk.Tk()
 ventana.title("Lectura de Sensor con Arduino")
 ventana.geometry("500x400")
 ```
-### **🔍 Explicación**
+### ** Explicación**
 - **`tk.Tk()`**: Crea la ventana principal.
 - **`title("Lectura de Sensor con Arduino")`**: Define el título de la ventana.
 - **`geometry("500x400")`**: Define el **tamaño de la ventana** en píxeles.
 
 ---
 
-## **7️⃣ Creación de Etiquetas para Mostrar el Valor**
+## **7️ Creación de Etiquetas para Mostrar el Valor**
 ```python
 etiqueta = tk.Label(ventana, text="Leyendo datos del sensor...", font=("Arial", 14))
 etiqueta.pack(pady=10)
@@ -215,7 +215,7 @@ etiqueta.pack(pady=10)
 etiqueta_valor = tk.Label(ventana, text="Valor Sensor: --", font=("Arial", 18), fg="blue")
 etiqueta_valor.pack(pady=10)
 ```
-### **🔍 Explicación**
+### ** Explicación**
 - **`Label(ventana, text=...)`**: Crea un texto en la interfaz.
 - **`font=("Arial", 14)`**: Define el **tamaño y tipo de letra**.
 - **`fg="blue"`**: Pone el texto en **color azul**.
@@ -223,36 +223,36 @@ etiqueta_valor.pack(pady=10)
 
 ---
 
-## **8️⃣ Integración de la Gráfica en Tkinter**
+## **8️ Integración de la Gráfica en Tkinter**
 ```python
 fig, ax = plt.subplots(figsize=(5, 3))
 canvas = FigureCanvasTkAgg(fig, master=ventana)  # Agrega la figura a Tkinter
 canvas.get_tk_widget().pack()
 ```
-### **🔍 Explicación**
+### ** Explicación**
 1. **Crea una figura con `plt.subplots()`** de Matplotlib.
 2. **Integra la figura en Tkinter** con `FigureCanvasTkAgg(fig, master=ventana)`.
 3. **Empaqueta la gráfica dentro de la ventana** con `canvas.get_tk_widget().pack()`.
 
 ---
 
-## **9️⃣ Animación para Actualizar la Gráfica en Tiempo Real**
+## **9️ Animación para Actualizar la Gráfica en Tiempo Real**
 ```python
 ani = FuncAnimation(fig, actualizar_grafico, interval=1000)
 ```
-### **🔍 Explicación**
+### ** Explicación**
 - `FuncAnimation(fig, actualizar_grafico, interval=1000)`:  
   - **Ejecuta `actualizar_grafico()` cada segundo**.
   - **Redibuja la gráfica** con los valores actualizados.
 
 ---
 
-## **🔟 Iniciar la Lectura del Sensor y la Interfaz**
+## ** Iniciar la Lectura del Sensor y la Interfaz**
 ```python
 leer_sensor()
 ventana.mainloop()
 ```
-### **🔍 Explicación**
+### ** Explicación**
 - **`leer_sensor()`**: Comienza la lectura de datos desde Arduino.
 - **`ventana.mainloop()`**: Mantiene abierta la interfaz gráfica y espera eventos (clics, teclas, etc.).
 
